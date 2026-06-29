@@ -1,52 +1,48 @@
-# multilingual-translation-benchmark
-Implementation scripts for multilingual translation benchmark experiments.
 # Multi-Metric Evaluation of Translation-Based Cross-Lingual Sentiment Consistency Using Large Language Models and Neural Machine Translation
 
-This repository contains the implementation used in the experiments presented in the paper:
+This repository contains the implementation scripts used in the experiments reported in the manuscript:
 
 **Multi-Metric Evaluation of Translation-Based Cross-Lingual Sentiment Consistency Using Large Language Models and Neural Machine Translation**
 
-The repository provides the scripts used for multilingual translation, sentiment evaluation, semantic similarity analysis, translation quality assessment, and statistical analysis.
+The repository includes the complete experimental pipeline for multilingual translation, sentiment evaluation, semantic similarity analysis, translation quality assessment, and statistical analysis.
 
 ---
 
 # Overview
 
-Cross-lingual sentiment analysis often relies on machine translation to bridge language differences. However, translation errors may alter the original sentiment while preserving semantic meaning. This repository accompanies our study, which systematically evaluates whether modern translation systems preserve sentiment consistency across multiple language pairs.
+Cross-lingual sentiment analysis frequently relies on machine translation to overcome language barriers. However, translation may alter sentiment while preserving semantic meaning. This study systematically evaluates whether modern translation systems preserve sentiment consistency across multiple languages.
 
 The benchmark compares ten contemporary translation systems, including commercial Neural Machine Translation (NMT) services, open-source NMT models, commercial Large Language Models (LLMs), general-purpose open-source LLMs, and a specialized translation-oriented LLM.
 
-The experiments evaluate four languages:
+The experiments include four languages:
 
 - English (EN)
 - Chinese (ZH)
 - Spanish (ES)
 - French (FR)
 
-covering all 12 possible translation directions.
+All twelve possible translation directions were evaluated.
 
 ---
 
 # Translation Systems
 
-The following translation systems were evaluated:
-
 ## Commercial Neural Machine Translation
 
-- Google Translate (Google Cloud Translation API)
+- Google Translate (Google Cloud Translation API v2)
 - Microsoft Translator (Microsoft Translator Text API)
 
 ## Open-Source Neural Machine Translation
 
 - Meta NLLB-200-distilled-600M
-- LibreTranslate
+- LibreTranslate (v1.5)
 
 ## Commercial Large Language Models
 
 - GPT-4o-mini
 - Gemini 2.5 Flash-Lite
 
-## Open-Source General-Purpose LLMs
+## Open-Source General-Purpose Large Language Models
 
 - Meta-Llama-3.1-8B-Instruct
 - Qwen2.5-7B-Instruct
@@ -60,12 +56,15 @@ The following translation systems were evaluated:
 
 # Evaluation Framework
 
-The translated outputs were evaluated using a multidimensional framework consisting of sentiment preservation, semantic similarity, and translation quality metrics.
-
 ## Sentiment Analysis
 
-- XLM-RoBERTa (cardiffnlp/twitter-xlm-roberta-base-sentiment)
-- NLPTown multilingual sentiment model (cross-model validation)
+Sentiment labels were generated using the multilingual XLM-RoBERTa sentiment classifier:
+
+- CardiffNLP XLM-RoBERTa (twitter-xlm-roberta-base-sentiment)
+
+Additional validation was performed using:
+
+- NLPTown multilingual sentiment classifier
 
 ## Sentiment Consistency Metrics
 
@@ -76,27 +75,24 @@ The translated outputs were evaluated using a multidimensional framework consist
 
 ## Translation Quality
 
+Translation quality was evaluated using:
+
 - COMET-QE (wmt22-cometkiwi-da)
 
 ## Semantic Similarity
 
-- LaBSE
-- Cosine Similarity
+Semantic similarity was evaluated using Language-Agnostic BERT Sentence Embeddings (LaBSE). Semantic preservation was quantified by computing cosine similarity between the source and translated sentence embeddings.
 
 ---
 
 # Statistical Analysis
 
-Performance differences among translation systems were evaluated using:
+Performance differences among translation systems were analyzed using:
 
-- Friedman Test
-- Nemenyi Post-hoc Test
+- Friedman test
+- Nemenyi post-hoc test
 
-Significance level:
-
-```
-p < 0.05
-```
+The statistical significance threshold was set to **p < 0.05**.
 
 ---
 
@@ -104,12 +100,12 @@ p < 0.05
 
 ```
 translation/
-    Commercial and open-source translation scripts
+    Translation scripts for all evaluated translation systems
 
 evaluation/
     Sentiment analysis
-    COMET-QE
-    LaBSE
+    COMET-QE evaluation
+    LaBSE semantic similarity
     Evaluation metrics
 
 analysis/
@@ -118,7 +114,6 @@ analysis/
     Figures
 
 requirements.txt
-
 README.md
 ```
 
@@ -126,49 +121,29 @@ README.md
 
 # Computational Environment
 
-Experiments were conducted using
+The experiments were conducted using:
 
 - Google Colab Pro+
 - NVIDIA A100-SXM4-40GB GPU
-- Hugging Face Transformers
 - PyTorch
+- Hugging Face Transformers
 
 ---
 
 # Reproducibility
 
-The repository contains the implementation used to reproduce the experiments reported in the paper.
+This repository contains the implementation scripts used to reproduce the experiments reported in the associated manuscript.
 
-The provided scripts include:
-
-- multilingual translation
-- sentiment prediction
-- COMET-QE evaluation
-- LaBSE similarity computation
-- statistical analysis
-
-Commercial API credentials have been removed for security reasons and must be supplied by users through their own API keys.
-
----
-
-# Installation
-
-Install the required packages using
-
-```bash
-pip install -r requirements.txt
-```
+Commercial API credentials have been removed for security reasons. Users should provide their own API credentials where required.
 
 ---
 
 # Citation
 
-If you use this repository in your research, please cite the associated publication.
-
-Citation information will be updated after publication.
+Citation information will be added after publication of the manuscript.
 
 ---
 
 # License
 
-This project is released under the MIT License.
+This project is distributed under the MIT License.
