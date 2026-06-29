@@ -1,3 +1,23 @@
+"""
+Qwen2.5-7B-Instruct Translation Script
+
+This script reproduces the multilingual translation experiments reported in:
+Multi-Metric Evaluation of Translation-Based Cross-Lingual
+Sentiment Consistency Using Large Language Models and Neural Machine Translation
+
+Model:
+    Qwen/Qwen2.5-7B-Instruct
+
+Framework:
+    Hugging Face Transformers
+
+Decoding:
+    Greedy decoding (do_sample=False)
+
+Hardware:
+    NVIDIA A100 GPU
+"""
+
 import os
 import time
 import logging
