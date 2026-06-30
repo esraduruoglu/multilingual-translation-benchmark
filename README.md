@@ -134,6 +134,8 @@ The experiments were conducted using:
 
 This repository contains the implementation scripts used to reproduce the experiments reported in the associated manuscript.
 
+The original dataset and generated translation outputs are not included in this repository. Users should prepare their own input dataset following the expected schema described in the manuscript.
+
 Commercial API credentials have been removed for security reasons. Users should provide their own API credentials where required.
 
 ---
