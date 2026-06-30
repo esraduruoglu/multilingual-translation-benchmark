@@ -110,8 +110,6 @@ evaluation/
 
 analysis/
     Statistical analysis
-    Tables
-    Figures
 
 requirements.txt
 README.md
