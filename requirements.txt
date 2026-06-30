@@ -13,6 +13,7 @@ scipy
 seaborn
 sentence-transformers
 sentencepiece
+tabulate
 torch
 tqdm
 transformers
