@@ -25,10 +25,10 @@ Hardware:
 
 Reproducibility:
     The model was executed locally using the Hugging Face Transformers
-    framework. Deterministic greedy decoding (do_sample=False) was used,
-    and no sampling seed was required because probabilistic sampling was
-    disabled. The complete system prompt and user prompt are provided in
-    the source code for full transparency and reproducibility.
+    framework with deterministic greedy decoding (do_sample=False).
+    No sampling seed was required because probabilistic sampling was
+    disabled. The complete system prompt and user prompt are provided
+    in the source code to support transparency and reproducibility.
 """
 
 import os
