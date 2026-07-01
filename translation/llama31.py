@@ -2,8 +2,9 @@
 Meta-Llama-3.1-8B-Instruct Translation Script
 
 This script reproduces the multilingual translation experiments reported in:
-Multi-Metric Evaluation of Translation-Based Cross-Lingual
-Sentiment Consistency Using Large Language Models and Neural Machine Translation
+
+    Multi-Metric Evaluation of Translation-Based Cross-Lingual
+    Sentiment Consistency Using Large Language Models and Neural Machine Translation
 
 Model:
     meta-llama/Meta-Llama-3.1-8B-Instruct
@@ -11,11 +12,23 @@ Model:
 Framework:
     Hugging Face Transformers
 
-Decoding:
+Inference Configuration:
     Greedy decoding (do_sample=False)
+    max_new_tokens = 128
+    batch size = 32
+
+Prompting:
+    Chat template with explicit system and user prompts.
 
 Hardware:
     NVIDIA A100 GPU
+
+Reproducibility:
+    The model was executed locally using the Hugging Face Transformers
+    framework with deterministic greedy decoding (do_sample=False).
+    Since probabilistic sampling was disabled, no sampling seed was
+    required. The complete system prompt and user prompt are included
+    in the source code to support transparency and reproducibility.
 """
 
 import os
