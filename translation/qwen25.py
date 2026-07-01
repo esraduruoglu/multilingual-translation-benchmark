@@ -2,8 +2,9 @@
 Qwen2.5-7B-Instruct Translation Script
 
 This script reproduces the multilingual translation experiments reported in:
-Multi-Metric Evaluation of Translation-Based Cross-Lingual
-Sentiment Consistency Using Large Language Models and Neural Machine Translation
+
+    Multi-Metric Evaluation of Translation-Based Cross-Lingual
+    Sentiment Consistency Using Large Language Models and Neural Machine Translation
 
 Model:
     Qwen/Qwen2.5-7B-Instruct
@@ -11,11 +12,23 @@ Model:
 Framework:
     Hugging Face Transformers
 
-Decoding:
+Inference Configuration:
     Greedy decoding (do_sample=False)
+    max_new_tokens = 256
+    batch size = 128
+
+Prompting:
+    Chat template with explicit system and user prompts.
 
 Hardware:
     NVIDIA A100 GPU
+
+Reproducibility:
+    The model was executed locally using the Hugging Face Transformers
+    framework. Deterministic greedy decoding (do_sample=False) was used,
+    and no sampling seed was required because probabilistic sampling was
+    disabled. The complete system prompt and user prompt are provided in
+    the source code for full transparency and reproducibility.
 """
 
 import os
