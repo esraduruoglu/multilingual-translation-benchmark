@@ -1,7 +1,3 @@
-# Multi-Metric Evaluation of Translation-Based Cross-Lingual Sentiment Consistency Using Large Language Models and Neural Machine Translation
-
-This repository contains the implementation scripts used in the experiments reported in the manuscript:
-
 **Multi-Metric Evaluation of Translation-Based Cross-Lingual Sentiment Consistency Using Large Language Models and Neural Machine Translation**
 
 The repository includes the complete experimental pipeline for multilingual translation, sentiment evaluation, semantic similarity analysis, translation quality assessment, and statistical analysis.
@@ -98,24 +94,72 @@ The statistical significance threshold was set to **p < 0.05**.
 
 # Repository Structure
 
-```
+```text
+preprocessing/
+    text_preprocessing.py
+
+labeling/
+    xlmr_sentiment_labeling.py
+
 translation/
-    Translation scripts for all evaluated translation systems
+    GPT-4o-mini
+    Gemini 2.5 Flash-Lite
+    Meta-Llama-3.1-8B-Instruct
+    Qwen2.5-7B-Instruct
+    Mistral-7B-Instruct-v0.3
+    NLLB-200
+    LibreTranslate
+    Google Translate
+    Microsoft Translator
+    NiuTrans/LMT-60-1.7B
 
 evaluation/
-    Sentiment analysis
-    COMET-QE evaluation
+    Accuracy
+    Weighted F1-score
+    Matthews Correlation Coefficient (MCC)
+    Sentiment Stability Ratio (SSR)
+    COMET-QE
     LaBSE semantic similarity
-    Evaluation metrics
 
 analysis/
-    Statistical analysis
+    Friedman test
+    Nemenyi post-hoc test
 
 requirements.txt
 README.md
 ```
 
 ---
+
+# Experimental Workflow
+
+The complete experimental pipeline implemented in this repository consists of the following stages:
+
+1. Data preprocessing
+   - Text normalization
+   - Emoji removal
+   - HTML tag removal
+   - URL removal
+   - Numeric character removal
+
+2. Reference sentiment labeling
+   - CardiffNLP XLM-RoBERTa multilingual sentiment classifier
+
+3. Machine translation
+   - Commercial NMT systems
+   - Open-source NMT systems
+   - Commercial LLMs
+   - Open-source LLMs
+   - Translation-oriented LLM
+
+4. Evaluation
+   - Sentiment consistency (Accuracy, Weighted F1-score, MCC, SSR)
+   - Translation quality (COMET-QE)
+   - Semantic similarity (LaBSE cosine similarity)
+
+5. Statistical analysis
+   - Friedman test
+   - Nemenyi post-hoc test
 
 # Computational Environment
 
@@ -130,11 +174,23 @@ The experiments were conducted using:
 
 # Reproducibility
 
-This repository contains the implementation scripts used to reproduce the experiments reported in the associated manuscript.
+This repository contains the complete implementation of the experimental workflow reported in the associated manuscript, including:
 
-The original dataset and generated translation outputs are not included in this repository. Users should prepare their own input dataset following the expected schema described in the manuscript.
+- Data preprocessing
+- Reference sentiment labeling
+- Translation using all evaluated systems
+- Sentiment consistency evaluation
+- Translation quality evaluation (COMET-QE)
+- Semantic similarity evaluation (LaBSE)
+- Statistical analysis
 
-Commercial API credentials have been removed for security reasons. Users should provide their own API credentials where required.
+Each implementation includes the corresponding model configuration, inference settings, prompts (where applicable), execution environment, and reproducibility notes.
+
+The original dataset and generated translation outputs are not distributed with this repository. Users should prepare an input dataset following the schema described in the manuscript.
+
+Commercial API credentials (e.g., OpenAI and Google Gemini API keys) and Hugging Face access tokens have been intentionally removed for security reasons and must be supplied by users before execution.
+
+All required Python dependencies are listed in requirements.txt.
 
 ---
 
