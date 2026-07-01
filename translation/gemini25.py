@@ -1,18 +1,34 @@
 """
-Gemini-2.5-Flash-Lite Translation Script
+Google Gemini 2.5 Flash-Lite Translation Script
 
 This script reproduces the multilingual translation experiments reported in:
-Multi-Metric Evaluation of Translation-Based Cross-Lingual
-Sentiment Consistency Using Large Language Models and Neural Machine Translation
+
+    Multi-Metric Evaluation of Translation-Based Cross-Lingual
+    Sentiment Consistency Using Large Language Models and Neural Machine Translation
 
 Model:
-    gemini-2.5-flash-lite (Google Gemini API via REST)
+    Google Gemini 2.5 Flash-Lite
 
-Decoding:
-    Deterministic temperature-controlled decoding (temperature=0.0)
+API:
+    Google Gemini REST API (v1beta)
+
+Inference Configuration:
+    temperature = 0.0
+    batch size = 15
+
+Prompting:
+    Single instruction prompt containing translation instructions,
+    output-format constraints, and response formatting rules.
 
 Hardware:
-    Cloud API Execution (Hardware Agnostic)
+    Cloud API Execution (Provider-managed Infrastructure)
+
+Reproducibility:
+    The experiments used the Google Gemini REST API (v1beta) with
+    gemini-2.5-flash-lite and temperature fixed to 0.0. No sampling
+    seed was specified because the API does not expose deterministic
+    seed control. Consequently, identical outputs across repeated API
+    calls cannot be guaranteed despite deterministic decoding settings.
 """
 
 import os
@@ -42,7 +58,11 @@ FILE_PATH = os.path.join(BASE_PATH, FILE_NAME)
 # CRITICAL SECURITY FIXED: API Key is fetched securely from environment variables
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
-BATCH_SIZE = 15  # Optimized batch size for target API payload constraints
+MODEL_NAME = "gemini-2.5-flash-lite"
+API_VERSION = "v1beta"
+TEMPERATURE = 0.0
+
+BATCH_SIZE = 15
 PRINT_EVERY = 300
 SAVE_EVERY = 300
 
@@ -62,8 +82,9 @@ lang_full = {'en': 'English', 'es': 'Spanish', 'fr': 'French', 'zh': 'Chinese'}
 # ==========================================
 def translate_batch_api(indices, texts, src, tgt):
     """
-    Sends batched texts to Gemini API using structured system prompting 
-    to ensure precise text isolation and dynamic index reconstruction.
+    Sends batched texts to the Gemini API using an instruction-based prompt
+    and returns translations mapped back to the original dataset indices. 
+    
     """
     if not GEMINI_API_KEY:
         raise ValueError("Critical Error: GEMINI_API_KEY environment variable is not set.")
@@ -81,8 +102,18 @@ def translate_batch_api(indices, texts, src, tgt):
     )
     
     payload = {
-        "contents": [{"parts": [{"text": prompt}]}],
-        "generationConfig": {"temperature": 0.0}  # Pure greedy API decoding
+        "contents": [
+            {
+                "parts": [
+                    {
+                        "text": prompt
+                    }
+                ]
+            }
+        ],
+        "generationConfig": {
+            "temperature": TEMPERATURE
+        }
     }
     
     try:
