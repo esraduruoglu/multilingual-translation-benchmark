@@ -2,8 +2,9 @@
 Mistral-7B-Instruct-v0.3 Translation Script
 
 This script reproduces the multilingual translation experiments reported in:
-Multi-Metric Evaluation of Translation-Based Cross-Lingual
-Sentiment Consistency Using Large Language Models and Neural Machine Translation
+
+    Multi-Metric Evaluation of Translation-Based Cross-Lingual
+    Sentiment Consistency Using Large Language Models and Neural Machine Translation
 
 Model:
     mistralai/Mistral-7B-Instruct-v0.3
@@ -11,11 +12,23 @@ Model:
 Framework:
     Hugging Face Transformers
 
-Decoding:
+Inference Configuration:
     Greedy decoding (do_sample=False)
+    max_new_tokens = 128
+    batch size = 64
+
+Prompting:
+    Chat template with explicit system and user prompts.
 
 Hardware:
     NVIDIA A100 GPU
+
+Reproducibility:
+    The model was executed locally using the Hugging Face Transformers
+    framework with deterministic greedy decoding (do_sample=False).
+    No sampling seed was required because probabilistic sampling was
+    disabled. The complete system prompt and user prompt are provided
+    in the source code to support transparency and reproducibility.
 """
 
 import os
