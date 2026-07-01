@@ -1,18 +1,28 @@
 """
-GPT-4o-mini Translation Script
-
-This script reproduces the multilingual translation experiments reported in:
-Multi-Metric Evaluation of Translation-Based Cross-Lingual
-Sentiment Consistency Using Large Language Models and Neural Machine Translation
-
 Model:
-    gpt-4o-mini (OpenAI API via REST)
+    OpenAI GPT-4o-mini
 
-Decoding:
-    Deterministic structured output decoding (response_format=json_object, temperature=0.0)
+API:
+    OpenAI Chat Completions API
 
-Hardware:
-    Cloud API Execution (Hardware Agnostic)
+System Prompt:
+    "You are a translation engine. Translate from {source language} to
+     {target language}. Return ONLY a JSON array of strings."
+
+User Prompt:
+    "Translate these lines:"
+
+Inference Configuration:
+    temperature = 0.0
+    response_format = json_object
+    retries = 2
+
+Reproducibility:
+    No sampling seed was specified because the OpenAI Chat Completions
+    API does not expose deterministic seed control. Although temperature
+    was fixed to 0.0, identical outputs across repeated API calls cannot
+    be guaranteed because inference is executed on provider-managed
+    infrastructure.
 """
 
 import os
